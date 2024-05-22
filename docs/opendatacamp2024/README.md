@@ -2,6 +2,8 @@
 
 A warm welcome to the Open Data Camp 2024 in Dresden and to the Colouring Dresden project!
 
+The project is organised in Dresden by Leibniz-Institute of Ecological Urband Regional Development (IOER) in Dresden (https://www.ioer.de/projekte/colouring-dresden)
+
 ## Challenge
 
 Colouring Dresden is part of the challenge "" and offers the opportunity to use a dataset containing crowd-sourced 
@@ -36,13 +38,13 @@ see: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort/projekte-kooperati
 
 ### Coding new features in platform 
 
-### software architecture
+#### Software architecture
 
 
-### Folder structure of GitHub Repository
+#### Folder structure of GitHub Repository
 
 
-### Setting up a local dev environment
+#### Setting up a local dev environment
 
 
 
