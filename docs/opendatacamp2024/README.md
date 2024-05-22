@@ -2,11 +2,13 @@
 
 A warm welcome to the Open Data Camp 2024 in Dresden and to the Colouring Dresden project!
 
-The project is organised in Dresden by Leibniz-Institute of Ecological Urband Regional Development (IOER) in Dresden (https://www.ioer.de/projekte/colouring-dresden)
+The project is organised in Dresden by **Leibniz-Institute of Ecological Urband Regional Development (IOER)** in Dresden (https://www.ioer.de/projekte/colouring-dresden)
 
 ## Challenge
 
-Colouring Dresden is part of the challenge "" and offers the opportunity to use a dataset containing crowd-sourced 
+Colouring Dresden is part of the challenge "" and offers the opportunity:
+- to use a dataset containing crowd-sourced collected building attributes 
+- to code new features 
 
 see: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort/projekte-kooperationen/open-data-camp-2024.php
 
@@ -20,8 +22,10 @@ see: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort/projekte-kooperati
 - part of international research network Colouring Cities Research Programme (CCRP)
 
 ### Data categories
-- All building attributes are assigned to one category (so-called "tiles")
+- All building attributes (about 40) are assigned to a thematic category (so-called "tiles")
 - currently, seven are in use. Further will be enabled in future
+
+![categories of Colouring Dresden](images/categories.png)
 - documentation see:
 
 ### Further material
@@ -39,7 +43,7 @@ see: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort/projekte-kooperati
 ### Coding new features in platform 
 
 #### Software architecture
-
+![software architecture of Colouring Dresden](images/architecture.png)
 
 #### Folder structure of GitHub Repository
 
