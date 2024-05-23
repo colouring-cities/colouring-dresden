@@ -10,7 +10,7 @@ Colouring Dresden is part of the challenge "" and offers the opportunity:
 - to use a dataset containing crowd-sourced collected building attributes 
 - to code new features 
 
-see: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort/projekte-kooperationen/open-data-camp-2024.php
+see website of the ODC: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort/projekte-kooperationen/open-data-camp-2024.php
 
 
 ## About Colouring Dresden
