@@ -6,9 +6,10 @@ The project is organised in Dresden by **Leibniz-Institute of Ecological Urband 
 
 ## Challenge
 
-Colouring Dresden is part of the challenge "" and offers the opportunity:
+Colouring Dresden is part of the challenge "Digitaler Energiezwilling für Dresden" and offers the opportunity:
 - to use a dataset containing crowd-sourced collected building attributes 
-- to code new features 
+- to code new features within the Colouring Dresden platform
+
 
 see website of the ODC: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort/projekte-kooperationen/open-data-camp-2024.php
 
@@ -50,7 +51,7 @@ see website of the ODC: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort
 
 #### Setting up a local dev environment
 
-
+[Description see here](setup.md)
 
 
 
