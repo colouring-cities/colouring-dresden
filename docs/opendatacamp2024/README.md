@@ -29,11 +29,11 @@ see: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort/projekte-kooperati
 - documentation see:
 
 ### Further material
-- Platform: 
-- Project page:
-- Documents on Zenodo (e.g. slides, posters):
-- X:
-- Instagram:
+- Platform: https://colouring.dresden.ioer.de/
+- Project page: https://colouring.dresden.ioer.info/
+- Documents on Zenodo (e.g. protocolls, slides, posters): https://zenodo.org/communities/ioer_dresden/search?page=1&size=20&q=&keywords=Colouring%20Dresden
+- X: https://twitter.com/colouringdd
+- Instagram: https://www.instagram.com/colouringdd/
 
 
 ## How to contribute?
