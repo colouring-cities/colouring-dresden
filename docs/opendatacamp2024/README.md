@@ -51,7 +51,9 @@ see website of the ODC: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort
 
 #### Setting up a local dev environment
 
-[Description see here](setup.md)
+[Workflow to set up dev environment by importin image file of Ubuntu-VM / VirtualBox](setup_import_vm.md)
+
+[Workflow to set up dev environment in a VirtualBox Ubuntu-VM from scratch using a DB Dump](setup_create_new_vm.md)
 
 
 
