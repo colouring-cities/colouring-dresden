@@ -2,16 +2,20 @@
 
 A warm welcome to the Open Data Camp 2024 in Dresden and to the Colouring Dresden project!
 
-The project is organised in Dresden by **Leibniz-Institute of Ecological Urband Regional Development (IOER)** in Dresden (https://www.ioer.de/projekte/colouring-dresden)
+The project Colouring Dresden is organised  by the [**Leibniz-Institute of Ecological Urband Regional Development (IOER)**](https://www.ioer.de/projekte/colouring-dresden) and its partners.
+It is a part of the global [**Colouring Cities Research Programme (CCRP)**](https://colouringcities.org/).
 
 ## Challenge
 
-Colouring Dresden is part of the challenge "Digitaler Energiezwilling für Dresden" and offers the opportunity:
-- to use a dataset containing crowd-sourced collected building attributes 
-- to code new features within the Colouring Dresden platform
+Colouring Dresden is a part of the challenge "Digitaler Energiezwilling für Dresden" and offers the opportunity:
+- to use a dataset containing crowd-sourced collected building attributes
+  - dataset on Zenodo: [**Crowd-sourced collected building attributes of the Colouring Dresden project (from 06 March 2023 to 01 October 2023)**](https://zenodo.org/records/10653065)
+- to code new features within the Colouring Dresden platform (like implementing new map styles e.g. on building level, integrate and link different datasets, classify buildings into energy classes etc)
+    - source code [on GitHub](https://github.com/colouring-cities/colouring-dresden), please use branch "opendatacamp2024"
+    - [docs](https://github.com/colouring-cities/colouring-dresden/tree/opendatacamp2024/docs/opendatacamp2024)
 
 
-see website of the ODC: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort/projekte-kooperationen/open-data-camp-2024.php
+Challenge description (in german) see on website of the ODC: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort/projekte-kooperationen/open-data-camp-2024.php
 
 
 ## About Colouring Dresden
@@ -19,15 +23,18 @@ see website of the ODC: https://www.dresden.de/de/wirtschaft/wirtschaftsstandort
 - Goal is to collect attributes for each building, like age, number of storeys, material
 - collecting a more precise dataset to describe buildings and to fill current gaps in existing datasets
 - make spatial modeling easier e.g. for AI prediction algorithm, for research or planning in the fields of climate adaption (flooding, heavy rain indicents, heat) or climate change (energy, reduction of CO2, ...)
-- everybody can contribute 
+- everybody can contribute, just creating an account
+- Tutorial How to Map: https://colouring.dresden.ioer.info/mitmachen
 - part of international research network Colouring Cities Research Programme (CCRP)
+
 
 ### Data categories
 - All building attributes (about 40) are assigned to a thematic category (so-called "tiles")
 - currently, seven are in use. Further will be enabled in future
 
 ![categories of Colouring Dresden](images/categories.png)
-- documentation see:
+- documentation of categories see: https://colouring.dresden.ioer.info/kacheln
+- energy category is currently in progress, see reserach project "Building Trust" https://colouring.dresden.ioer.info/buildingtrust
 
 ### Further material
 - Platform: https://colouring.dresden.ioer.de/
