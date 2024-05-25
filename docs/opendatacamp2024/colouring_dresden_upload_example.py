@@ -222,8 +222,8 @@ print(counter_buildings_with_adress)
 #building_id = 41106
 
 #data_upload = json.loads('{"building_attachment_form": "Detached"}')
-#api_url = r'http://colouringlondon.org'
-#apikey = '43f4e2ac-5446-4237-8b39-4474dddf3b9c'
+#api_url = r''
+#apikey = ''
 #building_id = 2484765
 
 
@@ -231,7 +231,7 @@ print(counter_buildings_with_adress)
 """ with requests.Session() as session:
     headers = {
            "api_key":apikey}
-    data_login = {'username':'colouringdresden_robots', 'password':'48_ezw7_1ze8'}
+    data_login = {'username':'xxx', 'password':'xxx'}
     
     print(api_url + '/api/login')
     post = session.post(api_url + '/api/login', headers=headers, json=data_login)
