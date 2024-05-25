@@ -76,3 +76,80 @@ for data model in database see here:
   - adding new attributes to API 
   - adding new mapstyle for map renderer
 - workflow see [here](https://github.com/colouring-cities/colouring-core/blob/master/docs/adding-new-fields.md)
+
+
+### Adding new builing attributes to API
+- add new field in: app/src/api/config/dataFields.ts
+**for simple datatype field like numeric or varchar**
+```bash
+name_attribute: {
+    edit: true,
+    verify: true
+},
+```
+**for building attribute as JSONB datatype**
+```bash
+name_attribute: {
+    edit: true,
+    verify: false,
+    asJson: true,
+    sqlCast: 'jsonb'
+},
+```
+- add new attribute to datafield config
+app/src/frontend/config/data-fields-config.ts
+
+IMPORTANT: energy category always is labeld as **sutainability** in the source code!
+
+for a attribute with select / DropDown to only use pre-defined values:
+```bash
+    name_attribute: {
+        category: Category.Sustainability,
+        title: "Wohnungsgröße",
+        tooltip: "Wie groß ist Ihre Wohnung?",
+        example: "",
+        items: [
+            "0-20qm",
+            "20-40qm",
+            "40-60qm",
+            "60-80qm",
+            "80-100qm"
+        ]
+    },
+```
+for a normal string or numeric datatype attribute:
+```bash
+    name_attribute: {
+        category: Category.Sustainability,
+        title: "xxx",
+        tooltip: "Hinweistext bei Klick auf das I",
+        example: "",
+    },
+
+```
+
+### add new building map style for new attributes
+
+- add map legend incl. colour boxes of legend:
+app/src/frontend/config/category-maps-config.ts
+
+- add new map style to XML (compare syntax from Mapnik or Geoserver)
+app/map_styles/polygon.xml
+
+- add new map style to config list of tile renderer / Mapnik
+app/src/frontend/config/tileserver-config.ts
+
+- select data from database with SQL query, e.g. do some calc in database 
+```bash
+SELECT col_A / col_b * col_C AS "coefficient" 
+FROM buildings 
+WHERE col_A IS NOT NULL;
+```
+in
+app/src/tiles/dataDefinition.ts
+
+
+### API endpoints
+check files in app/src/api/routes
+
+(sorry, that openapi doc is outdated, should be updated soon!)
