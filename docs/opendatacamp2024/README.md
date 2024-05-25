@@ -97,7 +97,7 @@ name_attribute: {
 },
 ```
 - add new attribute to datafield config
-app/src/frontend/config/data-fields-config.ts
+**app/src/frontend/config/data-fields-config.ts**
 
 IMPORTANT: energy category always is labeld as **sutainability** in the source code!
 
@@ -131,13 +131,13 @@ for a normal string or numeric datatype attribute:
 ### add new building map style for new attributes
 
 - add map legend incl. colour boxes of legend:
-app/src/frontend/config/category-maps-config.ts
+**app/src/frontend/config/category-maps-config.ts**
 
 - add new map style to XML (compare syntax from Mapnik or Geoserver)
-app/map_styles/polygon.xml
+**app/map_styles/polygon.xml**
 
 - add new map style to config list of tile renderer / Mapnik
-app/src/frontend/config/tileserver-config.ts
+**app/src/frontend/config/tileserver-config.ts**
 
 - select data from database with SQL query, e.g. do some calc in database 
 ```bash
@@ -146,10 +146,10 @@ FROM buildings
 WHERE col_A IS NOT NULL;
 ```
 in
-app/src/tiles/dataDefinition.ts
+**app/src/tiles/dataDefinition.ts**
 
 
 ### API endpoints
-check files in app/src/api/routes
+check files in **app/src/api/routes**
 
 (sorry, that openapi doc is outdated, should be updated soon!)
