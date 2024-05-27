@@ -41,7 +41,7 @@ Challenge description (in german) see on website of the ODC: https://www.dresden
 - Project page: https://colouring.dresden.ioer.info/
 - CCRP Landing page: https://colouringcities.org/
 - CCRP Manual / Wiki: https://github.com/colouring-cities/manual/wiki
-- Documents on Zenodo (e.g. protocolls, slides, posters): [on Zenodo](https://zenodo.org/communities/ioer_dresden/search?page=1&size=20&q=&keywords=Colouring%20Dresden) --> search "Colouring Dresden" within IOER community
+- Documents on Zenodo (e.g. protocolls, slides, posters): [on Zenodo](https://zenodo.org/communities/ioer_dresden/records?q=%22Colouring%20Dresden%22&l=list&p=1&s=10&sort=bestmatch) or search "Colouring Dresden" within IOER community
 - X / Twitter: https://twitter.com/colouringdd
 - Instagram: https://www.instagram.com/colouringdd/
 
