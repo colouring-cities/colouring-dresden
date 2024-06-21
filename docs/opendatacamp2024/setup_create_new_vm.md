@@ -230,7 +230,7 @@ Now install the required Node packages. This needs to done from the `app` direct
 local repository, so that it can read from the `package.json` file.
 
 ```bash
-cd ~/colouring-core/app
+cd ~/colouring-dresden/app
 npm install
 ```
 
