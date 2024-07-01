@@ -259,7 +259,7 @@ Now we are ready to run the application.
 First enter the app directory.
 
 ```bash
-cd ~/colouring-core/app
+cd ~/colouring-dresden/app
 ```
 
 Then create a folder for the tilecache.
@@ -273,7 +273,7 @@ Create some additional variables for running the application (the `APP_COOKIE_SE
 ```bash
 export PGPORT=5432
 export APP_COOKIE_SECRET=123456
-export TILECACHE_PATH=~/colouring-core/app/tilecache
+export TILECACHE_PATH=~/colouring-dresden/app/tilecache
 ```
 
 Finally, simply run the application with npm.
