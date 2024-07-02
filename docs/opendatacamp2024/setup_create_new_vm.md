@@ -101,13 +101,13 @@ sudo apt-get install -y gdal-bin libspatialindex-dev libgeos-dev libproj-dev
 
 ### :rainbow: Installing Colouring Cities Core Platform
 
-Now clone the `colouring-core` codebase. 
+Now clone the `colouring-dresde` codebase. 
 
 ```bash
 cd ~ && git clone https://github.com/colouring-cities/colouring-dresden.git
 ```
 
-**Note:** We assume here that you will clone the repo into the home directory of your Ubuntu installation. Watch out for later commands in this guide that assume the repo is located at `~/colouring-core` and modify the path if appropriate.
+**Note:** We assume here that you will clone the repo into the home directory of your Ubuntu installation. Watch out for later commands in this guide that assume the repo is located at `~/colouring-dresden` and modify the path if appropriate.
 
 ### :arrow_down: Installing Node.js
 
@@ -181,7 +181,7 @@ Create a superuser role for this user (`odc_user`) if it does not already exist.
 password `2024_col%dd` is arbitrary and probably should not be your Ubuntu login password.
 
 ```bash
-sudo -u postgres psql -c "SELECT 1 FROM pg_user WHERE usename = 'odc_user';" | grep -q 1 || sudo -u postgres psql -c "CREATE ROLE odc_user SUPERUSER LOGIN PASSWORD '2024_col%dd';"
+sudo -u postgres psql -c "SELECT 1 FROM pg_user WHERE username = 'odc_user';" | grep -q 1 || sudo -u postgres psql -c "CREATE ROLE odc_user SUPERUSER LOGIN PASSWORD '2024_col%dd';"
 ```
 
 <details>
@@ -289,7 +289,7 @@ Specify variables
 </summary>
 
 ```bash
-PGPASSWORD=<pgpassword> PGDATABASE=<colouringcitiesdb> PGUSER=<username> PGHOST=localhost PGPORT=5432 APP_COOKIE_SECRET=123456 TILECACHE_PATH=~/colouring-core/app/tilecache npm start
+PGPASSWORD=<pgpassword> PGDATABASE=<colouringcitiesdb> PGUSER=<username> PGHOST=localhost PGPORT=5432 APP_COOKIE_SECRET=123456 TILECACHE_PATH=~/colouring-dresden/app/tilecache npm start
 ```
 
 </details><p></p>
