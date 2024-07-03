@@ -181,7 +181,7 @@ Create a superuser role for this user (`odc_user`) if it does not already exist.
 password `2024_col%dd` is arbitrary and probably should not be your Ubuntu login password.
 
 ```bash
-sudo -u postgres psql -c "SELECT 1 FROM pg_user WHERE username = 'odc_user';" | grep -q 1 || sudo -u postgres psql -c "CREATE ROLE odc_user SUPERUSER LOGIN PASSWORD '2024_col%dd';"
+sudo -u postgres psql -c "SELECT 1 FROM pg_user WHERE usename = 'odc_user';" | grep -q 1 || sudo -u postgres psql -c "CREATE ROLE odc_user SUPERUSER LOGIN PASSWORD '2024_col%dd';"
 ```
 
 <details>
