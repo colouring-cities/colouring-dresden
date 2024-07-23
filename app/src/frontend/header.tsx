@@ -100,7 +100,7 @@ function getCurrentMenuLinks(username: string): MenuLink[][] {
                 external: true
             }, */
             {
-                to: "https://pages.colouring.london/colouring-cities",
+                to: "https://colouringcities.org/",
                 text: "Colouring Cities Research Programme (CCRP)",
                 external: true
             },
