@@ -178,14 +178,6 @@ print(inner_merged_total.shape)
 print(inner_merged_total.head())
 inner_merged_total.info()
 
-# --------------------------------
-# start session to API with login
-# --------------------------------
-
-
-
-
-
 
 # --------------------------------
 # iterate over all items
