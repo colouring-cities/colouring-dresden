@@ -13,7 +13,7 @@ import os
 #import argparse
 
 import requests
-#from retrying import retry
+from retrying import retry
 
 import time
 from time import gmtime, strftime
@@ -57,6 +57,8 @@ def make_row(location_number, location_street, location_town, location_postcode)
 # --------------------------------
 
 # TEST DEV
+
+# hier bitte die 4 Werte für api_url, apikey, username und password setzen
 api_url = r'url'
 apikey = 'api-key'
 
