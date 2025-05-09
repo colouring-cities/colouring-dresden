@@ -525,8 +525,8 @@ async function service_TickerNumberEdits(): Promise<TimeIntervalCount[]> {
     try {
         const extractRecords = await db.manyOrNone<TimeIntervalCount_Row>(
             `SELECT 
-                'Last 7 days' AS time_interval,
-                'Letzte 7 Tage' AS label_time_interval,
+                'Today' AS time_interval,
+                'Heute' AS label_time_interval,
                 COUNT(*) AS count
             FROM public.logs l
             WHERE 
@@ -535,8 +535,8 @@ async function service_TickerNumberEdits(): Promise<TimeIntervalCount[]> {
                 AND l.user_id NOT IN (SELECT user_id FROM public.users WHERE username LIKE '%_robots')
             UNION ALL
             SELECT 
-                'Last 7 days' AS time_interval,
-                'Letzte 7 Tage' AS label_time_interval,
+                'Last 24h' AS time_interval,
+                'Letzte 24h' AS label_time_interval,
                 COUNT(*) AS number_edits
             FROM public.logs l
             WHERE 
@@ -609,7 +609,7 @@ async function service_TickerLastEdits(): Promise<LastEdits[]> {
             `WITH log_details AS (
                 SELECT
                     l.log_id,
-                    DATE(l.log_timestamp) AS date,
+                    TO_CHAR(l.log_timestamp, 'YYYY-MM-DD') AS date,
                     TO_CHAR(l.log_timestamp, 'DD.MM.YYYY') AS label_date,
                     TO_CHAR(l.log_timestamp, 'HH24:MI:SS') AS time,
                     b.location_latitude,
@@ -667,7 +667,7 @@ async function service_TickerLastEdits(): Promise<LastEdits[]> {
 async function service_TickerTopMapper(): Promise<TopMapperValuesTimeInterval[]> {
     try {
         const extractRecords = await db.manyOrNone<TopMapperValuesTimeInterval_Row>(
-            `SELECT * FROM (
+            `SELECT a.* FROM (
                 SELECT 
                     u.username AS name,
                     COUNT(*) AS number_mapped_attributes,
@@ -682,9 +682,9 @@ async function service_TickerTopMapper(): Promise<TopMapperValuesTimeInterval[]>
                 GROUP BY u.username
                 ORDER BY number_mapped_attributes DESC
                 LIMIT 10
-            )
+            ) a
             UNION ALL
-            SELECT * FROM (
+            SELECT b.* FROM (
                 SELECT 
                     u.username AS name,
                     COUNT(*) AS number_mapped_attributes,
@@ -699,9 +699,9 @@ async function service_TickerTopMapper(): Promise<TopMapperValuesTimeInterval[]>
                 GROUP BY u.username
                 ORDER BY number_mapped_attributes DESC
                 LIMIT 10
-            )
+            ) b
             UNION ALL
-            SELECT * FROM (
+            SELECT c.* FROM (
                 SELECT 
                     u.username AS name,
                     COUNT(*) AS number_mapped_attributes,
@@ -715,7 +715,7 @@ async function service_TickerTopMapper(): Promise<TopMapperValuesTimeInterval[]>
                     AND u.username NOT LIKE '%_robots'
                 GROUP BY u.username
                 ORDER BY number_mapped_attributes DESC
-                LIMIT 10);`
+                LIMIT 10) c;`
         );
 
         return extractRecords.map(getTopMapperValuesTimeInterval);
@@ -1220,7 +1220,7 @@ async function service_ByDayCoverageAllAttributes(): Promise<ByDayCoverageAllAtt
             ),
             aggregated_logs AS (
                 SELECT 
-                    DATE(ll.log_timestamp) AS log_date,
+                    TO_CHAR(ll.log_timestamp, 'YYYY-MM-DD') AS log_date,
                     ll.key,
                     COUNT(*) AS anzahl
                 FROM latest_logs ll
