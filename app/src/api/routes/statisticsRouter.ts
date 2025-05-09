@@ -26,7 +26,7 @@ router.get('/ticker/top_mapper', statisticsController.getTickerTopMapper);
 router.get('/ticker/top_attributes', statisticsController.getTickerTopAttributes);
 router.get('/ticker/flop_attributes', statisticsController.getTickerFlopAttributes);
 router.get('/coverage/per_attribute', statisticsController.getCoveragePerAttribute);
-/* router.get('coverage/per_city_district.geojson', statisticsController.getCoveragePerCityDistrictGEOJSON); */
+/* router.get('/coverage/per_city_district.geojson', statisticsController.getCoveragePerCityDistrictGEOJSON); */
 router.get('/by_day/number_edits_citizens', statisticsController.getByDayNumberEditsCitizens);
 router.get('/by_day/number_attributes_citizens', statisticsController.getByDayNumberAttributesCitizens);
 router.get('/by_day/number_added_attributes_citizens', statisticsController.getByDayNumberAddedAttributesCitizens);
