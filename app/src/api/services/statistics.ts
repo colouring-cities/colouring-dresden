@@ -1225,7 +1225,7 @@ async function service_ByDayCoverageAllAttributes(): Promise<ByDayCoverageAllAtt
                     COUNT(*) AS anzahl
                 FROM latest_logs ll
                 WHERE ll.rn = 1 AND ll.value IS NOT NULL
-                GROUP BY DATE(ll.log_timestamp), ll.key
+                GROUP BY TO_CHAR(ll.log_timestamp, 'YYYY-MM-DD'), ll.key
             ),
             pivoted_logs AS (
                 SELECT
@@ -1235,7 +1235,7 @@ async function service_ByDayCoverageAllAttributes(): Promise<ByDayCoverageAllAtt
                 FROM 
                     (SELECT generate_series('2023-03-06'::DATE, CURRENT_DATE, '1 day') AS day) gs
                 CROSS JOIN mapping_feature_category f
-                LEFT JOIN aggregated_logs al ON gs.day = al.log_date AND f.feature_en = al.key
+                LEFT JOIN aggregated_logs al ON gs.day::text = al.log_date AND f.feature_en = al.key
                 GROUP BY gs.day, f.feature_en
             )
             SELECT 
