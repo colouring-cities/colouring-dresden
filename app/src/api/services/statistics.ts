@@ -728,71 +728,50 @@ async function service_TickerTopMapper(): Promise<TopMapperValuesTimeInterval[]>
 async function service_TickerTopAttributes(): Promise<TopFlopAttributesValueLabelCountTimeInterval[]> {
     try {
         const extractRecords = await db.manyOrNone<TopFlopAttributesValueLabelCountTimeInterval_Row>(
-            `(SELECT 
-                f.feature_en AS attribute,
-                f.feature_de AS label_attribute,
-                COALESCE(lc.anzahl_merkmale, 0) AS number_mapped_attributes,
-                'Today' AS time_interval,
-                'Heute' AS label_time_interval
-            FROM public.mapping_feature_category f
-            LEFT JOIN (
-                SELECT 
-                    feature,
-                    COUNT(*) AS anzahl_merkmale
-                FROM public.mapped_features mf 
-                WHERE mf.log_timestamp >= CURRENT_DATE
-                AND mf.log_timestamp <= CURRENT_TIMESTAMP
-                AND mf.user_id NOT IN (SELECT user_id FROM public.users WHERE username LIKE '%_robots')
-                GROUP BY feature
-                ) lc 
-                ON lc.feature = f.feature_en
-            WHERE f.crowd_sourced = true
-            ORDER BY COALESCE(lc.anzahl_merkmale, 0) DESC, attribute ASC
-            LIMIT 10)
-            UNION ALL
-            (SELECT 
-                f.feature_en AS attribute,
-                f.feature_de AS label_attribute,
-                COALESCE(lc.anzahl_merkmale, 0) AS number_mapped_attributes,
-                'Last 24h' AS time_interval,
-                'Letzte 24h' AS label_time_interval
-            FROM public.mapping_feature_category f
-            LEFT JOIN (
-                SELECT 
-                    feature,
-                    COUNT(*) AS anzahl_merkmale
-                FROM public.mapped_features mf 
+            `(SELECT
+                    mf.feature AS attribute,
+                    f.feature_de AS label_attribute,
+                    COUNT(*) AS number_mapped_attributes,
+                    'Today' AS time_interval,
+                    'Heute' AS label_time_interval
+                FROM public.mapped_features mf
+                LEFT JOIN public.mapping_feature_category f ON f.feature_en = mf.feature
+                WHERE mf.log_timestamp >= CURRENT_DATE 
+                    AND mf.log_timestamp <= CURRENT_TIMESTAMP
+                    AND mf.user_id NOT IN (SELECT user_id FROM public.users WHERE username LIKE '%_robots')
+                GROUP BY mf.feature, f.feature_de
+                ORDER BY number_mapped_attributes DESC, attribute ASC
+                LIMIT 10)
+                UNION ALL
+                (SELECT
+                    mf.feature AS attribute,
+                    f.feature_de AS label_attribute,
+                    COUNT(*) AS number_mapped_attributes,
+                    'Last 24h' AS time_interval,
+                    'Letzte 24h' AS label_time_interval
+                FROM public.mapped_features mf
+                LEFT JOIN public.mapping_feature_category f ON f.feature_en = mf.feature
                 WHERE mf.log_timestamp >= CURRENT_TIMESTAMP - INTERVAL '24 hours'
-                AND mf.log_timestamp <= CURRENT_TIMESTAMP
-                AND mf.user_id NOT IN (SELECT user_id FROM public.users WHERE username LIKE '%_robots')
-                GROUP BY feature
-                ) lc 
-                ON lc.feature = f.feature_en
-            WHERE f.crowd_sourced = true
-            ORDER BY COALESCE(lc.anzahl_merkmale, 0) DESC, attribute ASC
-            LIMIT 10)
-            UNION ALL
-            (SELECT 
-                f.feature_en AS attribute,
-                f.feature_de AS label_attribute,
-                COALESCE(lc.anzahl_merkmale, 0) AS number_mapped_attributes,
-                'Last 7 days' AS time_interval,
-                'Letzte 7 Tage' AS label_time_interval
-            FROM public.mapping_feature_category f
-            LEFT JOIN (
-                SELECT 
-                    feature,
-                    COUNT(*) AS anzahl_merkmale
+                    AND mf.log_timestamp <= CURRENT_TIMESTAMP
+                    AND mf.user_id NOT IN (SELECT user_id FROM public.users WHERE username LIKE '%_robots')
+                GROUP BY mf.feature, f.feature_de
+                ORDER BY number_mapped_attributes DESC, attribute ASC
+                LIMIT 10)
+                UNION ALL
+                (SELECT
+                    mf.feature AS attribute,
+                    f.feature_de AS label_attribute,
+                    COUNT(*) AS number_mapped_attributes,
+                    'Last 7 days' AS time_interval,
+                    'Letzte 7 Tage' AS label_time_interval
                 FROM public.mapped_features mf 
+                LEFT JOIN public.mapping_feature_category f ON f.feature_en = mf.feature
                 WHERE mf.log_timestamp >= CURRENT_DATE - INTERVAL '7 days'
-                AND mf.log_timestamp <= CURRENT_TIMESTAMP
-                AND mf.user_id NOT IN (SELECT user_id FROM public.users WHERE username LIKE '%_robots')
-                GROUP BY feature
-                ) lc 
-                ON lc.feature = f.feature_en
-            WHERE f.crowd_sourced = true
-            ORDER BY COALESCE(lc.anzahl_merkmale, 0) DESC, attribute ASC
-            LIMIT 10);`
+                    AND mf.log_timestamp <= CURRENT_TIMESTAMP
+                    AND mf.user_id NOT IN (SELECT user_id FROM public.users WHERE username LIKE '%_robots')
+                GROUP BY mf.feature, f.feature_de
+                ORDER BY number_mapped_attributes DESC, attribute ASC
+                LIMIT 10);`
         );
 
         return extractRecords.map(getTopFlopAttributesValueLabelCountTimeInterval);
