@@ -33,7 +33,7 @@ export default {
     getTickerTopAttributes: createAsyncHandler(statisticsService.service_TickerTopAttributes),
     getTickerFlopAttributes: createAsyncHandler(statisticsService.service_TickerFlopAttributes),
     getCoveragePerAttribute: createAsyncHandler(statisticsService.service_CoveragePerAttribute),
-    /* getCoveragePerCityDistrictGEOJSON: createAsyncHandler(statisticsService.service_CoveragePerCityDistrictGEOJSON), */
+    getCoveragePerCityDistrictGEOJSON: createAsyncHandler(statisticsService.service_CoveragePerCityDistrictGEOJSON),
     getByDayNumberEditsCitizens: createAsyncHandler(statisticsService.service_ByDayNumberEditsCitizens),
     getByDayNumberAttributesCitizens: createAsyncHandler(statisticsService.service_ByDayNumberAttributesCitizens),
     getByDayNumberAddedAttributesCitizens: createAsyncHandler(statisticsService.service_ByDayNumberAddedAttributesCitizens),

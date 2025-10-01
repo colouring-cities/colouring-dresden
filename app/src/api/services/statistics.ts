@@ -13,6 +13,13 @@ interface ByDay {
     value: number;
 }
 
+interface GeoJSON_Row {
+    geojson: any;
+}
+interface GeoJSON {
+    geojson: any;
+}
+
 
 interface ValueOnly_Row {
     value: number;
@@ -907,26 +914,26 @@ async function service_CoveragePerAttribute(): Promise<CoveragePerAttribute[]> {
                 Wie muss die Rückgabe als .geojson hier integriert werden?
 
 *//**************************************************************************************/
-/*async function service_CoveragePerCityDistrictGEOJSON(): Promise<ByDay[]> {
+async function service_CoveragePerCityDistrictGEOJSON(): Promise<GeoJSON[]> {
     try {
-        const extractRecords = await db.manyOrNone<ByDay_Row>(
+        const result = await db.oneOrNone<GeoJSON_Row>(
             `CREATE OR REPLACE FUNCTION __tmp_dynamic_building_attribute_count()
-            RETURNS TABLE(building_id INT, city_district_id INT, attribute_count INT) AS $$
-            DECLARE 
-                sql_query TEXT := 'SELECT building_id, city_district_id, ';
-                rec RECORD;
-            BEGIN
-                FOR rec IN 
-                    SELECT feature_en 
-                    FROM public.mapping_feature_category
-                LOOP
-                    sql_query := sql_query || 
-                        'CAST(COUNT(CASE WHEN ' || rec.feature_en || ' IS NOT NULL THEN 1 END) AS INT) + ';
-                END LOOP;
-                sql_query := left(sql_query, length(sql_query) - 2);  -- Remove trailing " + "
-                sql_query := sql_query || ' FROM buildings GROUP BY building_id;';
-                RETURN QUERY EXECUTE sql_query;
-            END $$ LANGUAGE plpgsql;
+                RETURNS TABLE(building_id INT, city_district_id INT, attribute_count INT) AS $$
+                DECLARE 
+                    sql_query TEXT := 'SELECT building_id, city_district_id, ';
+                    rec RECORD;
+                BEGIN
+                    FOR rec IN 
+                        SELECT feature_en 
+                        FROM public.mapping_feature_category
+                    LOOP
+                        sql_query := sql_query || 
+                            'CAST(COUNT(CASE WHEN ' || rec.feature_en || ' IS NOT NULL THEN 1 END) AS INT) + ';
+                    END LOOP;
+                    sql_query := left(sql_query, length(sql_query) - 2);  -- Remove trailing " + "
+                    sql_query := sql_query || ' FROM buildings GROUP BY building_id;';
+                    RETURN QUERY EXECUTE sql_query;
+                END $$ LANGUAGE plpgsql;
 
             WITH total_attribute_count_sum AS (
                 SELECT COUNT(*) AS total_attributes FROM mapping_feature_category
@@ -938,25 +945,42 @@ async function service_CoveragePerAttribute(): Promise<CoveragePerAttribute[]> {
                     COUNT(ba.building_id) AS total_buildings
                 FROM __tmp_dynamic_building_attribute_count() ba
                 GROUP BY ba.city_district_id
+            ), 
+            city_districts_with_attributes AS (
+                SELECT
+                    city_districts.name AS city_district,
+                    bas.id,
+                    bas.total_attribute_count AS number_mapped_properties,
+                    (bas.total_attribute_count::FLOAT / bas.total_buildings / tac.total_attributes) AS mapped_percent,
+                    city_districts.geometry 
+                FROM building_attribute_sum bas
+                JOIN total_attribute_count_sum tac ON true
+                RIGHT JOIN city_districts on city_districts.city_district_id = bas.id
             )
-            SELECT
-                city_districts.name AS city_district,
-                bas.id,
-                bas.total_attribute_count AS number_mapped_properties,
-                (bas.total_attribute_count::FLOAT / bas.total_buildings / tac.total_attributes) AS mapped_percent,
-                city_districts.geometry_asgeojson 
-            FROM building_attribute_sum bas
-            JOIN total_attribute_count_sum tac ON true
-            RIGHT JOIN city_districts on city_districts.city_district_id = bas.id;
-            DROP FUNCTION IF EXISTS __tmp_dynamic_building_attribute_count();`
+            SELECT json_build_object(
+            'type',     'FeatureCollection',
+            'features', json_agg(
+                json_build_object(
+                'type',       'Feature',
+                'geometry',   ST_AsGeoJSON(geometry)::json,
+                'properties', json_build_object(
+                    'id', id,
+                    'city_district', city_district,
+                    'number_mapped_properties', number_mapped_properties,
+                    'mapped_percent', mapped_percent
+                )
+                )
+            )
+            ) AS geojson
+            FROM city_districts_with_attributes;`
         );
 
-        return extractRecords.map(getByDay);
+        return result?.geojson || { type: "FeatureCollection", features: [] };
     } catch (err) {
         console.error('Error:', err);
         return undefined;
     }
-}*/
+}
 
 async function service_ByDayNumberEditsCitizens(): Promise<ByDay[]> {
     try {
@@ -1455,6 +1479,7 @@ export {
     service_TickerTopAttributes,
     service_TickerFlopAttributes,
     service_CoveragePerAttribute,
+    service_CoveragePerCityDistrictGEOJSON,
     service_ByDayNumberEditsCitizens,
     service_ByDayNumberAttributesCitizens,
     service_ByDayNumberAddedAttributesCitizens,
