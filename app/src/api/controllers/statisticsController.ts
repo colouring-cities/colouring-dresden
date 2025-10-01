@@ -14,6 +14,17 @@ const createAsyncHandler = (serviceFunction) =>
         }
     });
 
+const createAsyncHandler_for_geojson = (serviceFunction) =>
+    asyncController(async (req: express.Request, res: express.Response) => {
+        /* without data object in response */
+        try {
+            const dataObj = await serviceFunction();
+            res.send(dataObj);
+        } catch (err) {
+            res.send({ error: 'Database error' });
+        }
+    });
+
 export default {
     getTodayNumberNewAccounts: createAsyncHandler(statisticsService.service_TodayNumberNewAccounts),
     getTodayNumberAccountsTotal: createAsyncHandler(statisticsService.service_TodayNumberAccountsTotal),
@@ -33,7 +44,7 @@ export default {
     getTickerTopAttributes: createAsyncHandler(statisticsService.service_TickerTopAttributes),
     getTickerFlopAttributes: createAsyncHandler(statisticsService.service_TickerFlopAttributes),
     getCoveragePerAttribute: createAsyncHandler(statisticsService.service_CoveragePerAttribute),
-    getCoveragePerCityDistrictGEOJSON: createAsyncHandler(statisticsService.service_CoveragePerCityDistrictGEOJSON),
+    getCoveragePerCityDistrictGEOJSON: createAsyncHandler_for_geojson(statisticsService.service_CoveragePerCityDistrictGEOJSON),
     getByDayNumberEditsCitizens: createAsyncHandler(statisticsService.service_ByDayNumberEditsCitizens),
     getByDayNumberAttributesCitizens: createAsyncHandler(statisticsService.service_ByDayNumberAttributesCitizens),
     getByDayNumberAddedAttributesCitizens: createAsyncHandler(statisticsService.service_ByDayNumberAddedAttributesCitizens),
