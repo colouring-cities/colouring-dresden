@@ -909,11 +909,6 @@ async function service_CoveragePerAttribute(): Promise<CoveragePerAttribute[]> {
     }
 }
 
-/***************************************************************************************//*
-
-                Wie muss die Rückgabe als .geojson hier integriert werden?
-
-*//**************************************************************************************/
 async function service_CoveragePerCityDistrictGEOJSON(): Promise<GeoJSON[]> {
     try {
         const result = await db.oneOrNone<GeoJSON_Row>(
@@ -1238,7 +1233,7 @@ async function service_ByDayCoverageAllAttributes(): Promise<ByDayCoverageAllAtt
                 FROM 
                     (SELECT generate_series('2023-03-06'::DATE, CURRENT_DATE, '1 day') AS day) gs
                 CROSS JOIN mapping_feature_category f
-                LEFT JOIN aggregated_logs al ON gs.day::text = al.log_date AND f.feature_en = al.key
+                LEFT JOIN aggregated_logs al ON gs.day = al.log_date::date AND f.feature_en = al.key
                 GROUP BY gs.day, f.feature_en
             )
             SELECT 
